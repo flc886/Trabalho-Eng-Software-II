@@ -41,7 +41,6 @@ A classe `RotinaDeTreino` centraliza a ordem dos passos dentro do método `inici
 ## Pontos fracos
 - Como usa herança, carrega os problemas de herança junto: acopla bastante a subclasse com a classe base.
 - Se o fluxo principal mudar com frequência, o padrão atrapalha mais do que ajuda (toda mudança estrutural mexe na base e pode afetar todo mundo que herda dela).
-- Dá pra acabar quebrando o Liskov se uma subclasse implementar um passo de um jeito que não bate com o que o fluxo esperava.
 - Pra entender o comportamento completo de uma subclasse, às vezes precisa ficar pulando entre ela e a classe base, o que deixa a leitura um pouco mais chata.
 
 ---
