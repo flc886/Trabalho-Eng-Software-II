@@ -1,7 +1,3 @@
-// PROBLEMA: cada tipo de treino repete a mesma estrutura
-// (aquecer -> fase específica -> alongar) do zero.
-// Só muda o miolo, mas o resto do fluxo é todo duplicado.
-
 class TreinoCardio {
     iniciar() {
         console.log("Aquecendo por 5 minutos (caminhada leve)...");
@@ -22,7 +18,6 @@ class TreinoForca {
     }
 }
 
-// Testando
 console.log("--- SEM TEMPLATE METHOD ---");
 
 const cardio = new TreinoCardio();
@@ -31,6 +26,10 @@ cardio.iniciar();
 const forca = new TreinoForca();
 forca.iniciar();
 
-// Se um dia decidirmos mudar o tempo de aquecimento de 5 para 10 minutos,
-// temos que lembrar de alterar em TODAS as classes manualmente.
-// Quanto mais tipos de treino existirem, maior o risco de inconsistência.
+/*
+Reparem que aquecer() e alongar() aparecem igual nas duas classes.
+Imagina isso multiplicado por 5, 10 tipos de treino diferentes (HIIT, mobilidade, etc).
+Cada novo tipo = copiar e colar o aquecimento e o alongamento de novo.
+E se alguém decidir trocar o tempo de aquecimento pra 10 minutos,
+precisa caçar todas as classes que repetem essa linha e mudar uma por uma.
+*/
