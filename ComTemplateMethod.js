@@ -1,36 +1,28 @@
-// SOLUÇÃO: a classe mãe define a ORDEM fixa dos passos (o "esqueleto").
-// As subclasses só preenchem o que é específico de cada treino.
-
 class RotinaDeTreino {
-    // TEMPLATE METHOD: a ordem aqui é fixa, ninguém pode alterá-la de fora
+    // ordem fixa do processo - isso aqui é o template method
     iniciar() {
         this.aquecer();
         this.executarFaseEspecifica();
-        this.tocarMusicaMotivacional(); // hook opcional
+        this.tocarMusicaMotivacional();
         this.alongar();
         console.log("Treino finalizado!\n");
     }
 
-    // Passo comum, igual pra todo mundo
     aquecer() {
         console.log("Aquecendo por 5 minutos (caminhada leve)...");
     }
 
-    // Passo comum, igual pra todo mundo
     alongar() {
         console.log("Alongando por 5 minutos...");
     }
 
-    // Passo obrigatório - cada subclasse TEM que implementar
+    // sem implementação aqui de propósito - quem decide é a subclasse
     executarFaseEspecifica() {
-        throw new Error("O método executarFaseEspecifica() deve ser implementado pela subclasse.");
+        throw new Error("executarFaseEspecifica() precisa ser implementado pela subclasse.");
     }
 
-    // HOOK: passo opcional, com implementação padrão "vazia".
-    // A subclasse só sobrescreve se fizer sentido pra ela.
-    tocarMusicaMotivacional() {
-        // por padrão, não faz nada
-    }
+    // hook: já vem "desligado", só liga quem quiser
+    tocarMusicaMotivacional() {}
 }
 
 class TreinoCardio extends RotinaDeTreino {
@@ -49,10 +41,9 @@ class TreinoForca extends RotinaDeTreino {
         console.log("Iniciando série de musculação: 4x12 supino, 4x12 agachamento");
         console.log("Descanso de 90 segundos entre séries");
     }
-    // Não sobrescreve tocarMusicaMotivacional() -> usa o hook padrão (não faz nada)
+    // não mexeu no hook -> usa o padrão (não toca nada)
 }
 
-// Testando
 console.log("--- COM TEMPLATE METHOD ---");
 
 const cardio = new TreinoCardio();
@@ -61,5 +52,10 @@ cardio.iniciar();
 const forca = new TreinoForca();
 forca.iniciar();
 
-// Agora, se quisermos mudar o tempo de aquecimento, mudamos em UM lugar só
-// (dentro de RotinaDeTreino), e o ajuste vale automaticamente pra todas as subclasses.
+/*
+Agora aquecer() e alongar() moram só em RotinaDeTreino.
+TreinoCardio e TreinoForca nem sabem quando esses passos rodam,
+só sabem o que fazer no pedaço que é deles (executarFaseEspecifica).
+Trocar o tempo de aquecimento agora é uma linha só, lá na base,
+e o efeito já vale pra qualquer treino que existir.
+*/
